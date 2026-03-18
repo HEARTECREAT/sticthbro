@@ -10,7 +10,7 @@ from aiogram.filters import Command
 API_KEY = os.getenv("GEMINI_API_KEY")
 TELEGRAM_TOKEN = os.getenv("TELEGRAM_TOKEN")
 
-# Настройка Gemini (пробуем универсальный вариант названия)
+# Настройка Gemini (используем универсальное имя модели)
 genai.configure(api_key=API_KEY)
 model = genai.GenerativeModel('gemini-1.5-flash')
 
@@ -50,7 +50,6 @@ async def handle_message(message: types.Message):
             await message.answer("Бро, нейронка задумалась и ничего не выдала. Попробуй еще раз!")
     except Exception as e:
         logging.error(f"ОШИБКА GEMINI: {e}")
-        # Если опять 404, выведем это в чат, чтобы знать наверняка
         await message.answer(f"Бля, бро, чет связь с космосом прервалась. Ошибка: {str(e)[:50]}")
 
 async def main():
